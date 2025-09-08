@@ -115,9 +115,7 @@ userSchema.methods.getProfile = function() {
 };
 
 // Index for better query performance
-userSchema.index({ email: 1 });
-userSchema.index({ phone: 1 });
-userSchema.index({ panNumber: 1 });
+// Note: email and phone indexes are already created by unique: true
 userSchema.index({ createdAt: -1 });
 
 const UserModel = mongoose.model("User", userSchema);

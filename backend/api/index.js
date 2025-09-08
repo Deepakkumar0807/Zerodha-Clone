@@ -1,3 +1,4 @@
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -6,10 +7,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 
-import PositionsModel from "./model/PositionsModel.js";
-import HoldingsModel from "./model/HoldingsModel.js";
-import OrdersModel from "./model/OrdersModel.js";
-import UserModel from "./model/UserModel.js";
+import PositionsModel from "../model/PositionsModel.js";
+import HoldingsModel from "../model/HoldingsModel.js";
+import OrdersModel from "../model/OrdersModel.js";
+import UserModel from "../model/UserModel.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -40,6 +41,16 @@ app.get("/allPositions", async (req, res) => {
     res.json(allPositions);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch positions" });
+  }
+});
+
+// ✅ Orders API
+app.get("/allOrders", async (req, res) => {
+  try {
+    let allOrders = await OrdersModel.find({});
+    res.json(allOrders);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch orders" });
   }
 });
 
@@ -151,3 +162,5 @@ mongoose.connect(URI)
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err);
   });
+
+  
