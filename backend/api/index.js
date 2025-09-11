@@ -7,10 +7,10 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 
-import PositionsModel from "./model/PositionsModel.js";
-import HoldingsModel from "./model/HoldingsModel.js";
-import OrdersModel from "./model/OrdersModel.js";
-import UserModel from "./model/UserModel.js";
+import PositionsModel from "../model/PositionsModel.js";
+import HoldingsModel from "../model/HoldingsModel.js";
+import OrdersModel from "../model/OrdersModel.js";
+import UserModel from "../model/UserModel.js";
 
 const app = express();
 app.use(bodyParser.json());
