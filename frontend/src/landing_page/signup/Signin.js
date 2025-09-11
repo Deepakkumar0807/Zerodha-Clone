@@ -20,7 +20,7 @@ const Signin = ({ onSwitchToSignup }) => {
 
   const checkBackendConnection = async () => {
     try {
-      const response = await axios.get(" http://localhost:5000");
+      const response = await axios.get("https://zerodha-clone-two-theta.vercel.app/");
       if (response.data.message) {
         setBackendStatus("connected");
       }

@@ -29,7 +29,7 @@ const Signup = () => {
 
   const checkBackendConnection = async () => {
     try {
-      const response = await axios.get(" http://localhost:5000");
+      const response = await axios.get("https://zerodha-clone-hatw.vercel.app/");
       if (response.data.message) {
         setBackendStatus("connected");
       }
