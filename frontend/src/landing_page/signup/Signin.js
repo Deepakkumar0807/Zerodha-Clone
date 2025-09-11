@@ -20,7 +20,7 @@ const Signin = ({ onSwitchToSignup }) => {
 
   const checkBackendConnection = async () => {
     try {
-      const response = await axios.get("https://zerodha-clone-hatw.vercel.app/");
+      const response = await axios.get("https://zerodha-clone-two-theta.vercel.app/");
       if (response.data.message) {
         setBackendStatus("connected");
       }
@@ -116,22 +116,9 @@ const Signin = ({ onSwitchToSignup }) => {
           <p className="signup-subtitle">Sign in to your trading account</p>
           
           {/* Backend Status Indicator */}
-          <div className={`backend-status ${backendStatus}`}>
-            {backendStatus === "checking" && "🔄 Checking connection..."}
-            {backendStatus === "connected" && "✅ Backend connected"}
-            {backendStatus === "disconnected" && (
-              <div>
-                ❌ Backend disconnected
-                <button 
-                  className="retry-btn" 
-                  onClick={checkBackendConnection}
-                  style={{ marginLeft: '10px', padding: '4px 8px', fontSize: '10px' }}
-                >
-                  Retry
-                </button>
-              </div>
-            )}
-          </div>
+          
+            
+          
         </div>
         
         <form onSubmit={handleSubmit} className="signup-form">
