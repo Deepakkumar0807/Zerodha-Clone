@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { positions } from "../data/data";
 
 const Positions = () => {
   const [allPositions, setAllPositions] = useState([]);
@@ -8,16 +8,9 @@ const Positions = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("http://localhost:5000/allPositions")
-      .then((res) => {
-        setAllPositions(res.data || []);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching Positions:", err);
-        setAllPositions([]);
-        setIsLoading(false);
-      });
+    // Use local data instead of API call
+    setAllPositions(positions || []);
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {

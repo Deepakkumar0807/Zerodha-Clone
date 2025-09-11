@@ -2,7 +2,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <div className="container p-5 mb-5">
+    <div className="container-fluid p-5 mb-5">
       <div className="row text-center">
         <img
           src="media/images/homeHero.png"

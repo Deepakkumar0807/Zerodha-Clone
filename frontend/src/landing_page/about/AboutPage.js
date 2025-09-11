@@ -5,9 +5,11 @@ import Team from "./Team";
 
 function PricingPage() {
   return (
-    <>
+    <><div className="container-fluid">
+
       <Hero />
       <Team />
+    </div>
     </>
   );
 }

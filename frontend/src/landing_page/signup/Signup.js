@@ -152,7 +152,7 @@ const Signup = () => {
         
         // Open dashboard in new tab after successful signup
         setTimeout(() => {
-          window.open("http://localhost:3001/dashboad", "_blank");
+          window.open("http://localhost:3001/", "_blank");
         }, 1000);
       }
     } catch (error) {
@@ -360,7 +360,7 @@ const Signup = () => {
                 <p>Your Zerodha account has been created. You can now access the dashboard.</p>
                                  <button 
                    className="dashboard-btn success"
-                   onClick={() => window.open("http://localhost:3000", "_blank")}
+                   onClick={() => window.open("http://localhost:3001", "_blank")}
                  >
                    🚀 Open Dashboard
                  </button>

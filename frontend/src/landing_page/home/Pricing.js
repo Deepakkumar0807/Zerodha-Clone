@@ -2,11 +2,11 @@ import React from 'react';
 
 function Pricing() {
     return ( 
-       <div className="container">
+       <div className="container-fluid">
         <div className="row align-items-center">
           
           {/* Left Section */}
-          <div className="col-6">
+          <div className="col-12 col-md-6">
               <h1 className="fs-2">Unbeatable pricing</h1>
               <p>
                 We pioneered the concept of discount broking and price transparency in India. 
@@ -23,7 +23,7 @@ function Pricing() {
           {/* <div className="col-2"></div> */}
 
           {/* Right Section */}
-          <div className="col-6">
+          <div className="col-12 col-md-6">
               <div className="row mb-5">
                   <div className="col text-center p-2 border">
                       <h1 className="mb-3" style={{color:"orange"}}>₹0</h1>

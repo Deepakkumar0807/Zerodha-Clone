@@ -10,7 +10,8 @@ import Footer from "../Footer";
 
 function PricingPage() {
   return (
-    <>
+    <><div className="container-fluid">
+
       <Hero />
       <LeftSection
         imageURL="media/images/kite.png"
@@ -56,6 +57,7 @@ function PricingPage() {
         blog.
       </p>
       <Universe />
+    </div>
     </>
   );
 }

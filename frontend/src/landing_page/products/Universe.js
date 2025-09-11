@@ -1,7 +1,7 @@
 import React from 'react';
 function Universe() {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row text-center">
         <h1 className = "text-muted fs-3 mb-4">The Zerodha Universe</h1>
         <p>Extend your trading and investment experience even further with our partner platforms</p>

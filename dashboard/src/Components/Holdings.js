@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { VerticalGraph } from "./VerticalGraph";
-// import { holdings } from "../data/data";
+import { holdings } from "../data/data";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
@@ -9,16 +8,9 @@ const Holdings = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("http://localhost:5000/allHoldings")
-      .then((res) => {
-        setAllHoldings(res.data || []);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching holdings:", err);
-        setAllHoldings([]);
-        setIsLoading(false);
-      });
+    // Use local data instead of API call
+    setAllHoldings(holdings || []);
+    setIsLoading(false);
   }, []);
 
   // Only create chart data if we have holdings

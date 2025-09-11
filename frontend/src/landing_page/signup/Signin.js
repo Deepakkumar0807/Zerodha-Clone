@@ -20,7 +20,7 @@ const Signin = ({ onSwitchToSignup }) => {
 
   const checkBackendConnection = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/");
+      const response = await axios.get("https://zerodha-clone-hatw.vercel.app/");
       if (response.data.message) {
         setBackendStatus("connected");
       }
@@ -70,7 +70,7 @@ const Signin = ({ onSwitchToSignup }) => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post("http://localhost:5000/signin", formData);
+      const response = await axios.post("https://zerodha-clone-hatw.vercel.app/", formData);
       
       if (response.data.success) {
         setSigninSuccess(true);
@@ -85,7 +85,7 @@ const Signin = ({ onSwitchToSignup }) => {
         
         // Open dashboard in new tab after successful signin
         setTimeout(() => {
-          window.open("http://localhost:3001/dashboard", "_blank");
+          window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank");
         }, 1000);
       }
     } catch (error) {
@@ -188,7 +188,7 @@ const Signin = ({ onSwitchToSignup }) => {
             <p>Welcome back! You can now access your dashboard.</p>
                          <button 
                className="dashboard-btn success"
-               onClick={() => window.open("http://localhost:3001/dashboard", "_blank")}
+               onClick={() => window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")}
              >
                🚀 Open Dashboard
              </button>
@@ -214,7 +214,7 @@ const Signin = ({ onSwitchToSignup }) => {
            <button 
              type="button" 
              className="dashboard-btn"
-             onClick={() => window.open("http://localhost:3001/dashboard", "_blank")}
+             onClick={() => window.open("http://localhost:3001/", "_blank")}
              >
              Go to Dashboard
            </button>

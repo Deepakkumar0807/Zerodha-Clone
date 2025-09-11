@@ -6,20 +6,18 @@ import Pricing from "./Pricing";
 import Education from "./Education";
 
 import OpenAccount from "../OpenAccount";
-import Navbar from "../Navbar";
-import Footer from "../Footer";
 
 function HomePage() {
   return (
-    <>
+    <div className="container-fluid" style={{ width: "100%", maxWidth: 1200, margin: "0 auto", padding: "0 1rem" }}>
       <Hero />
       <Awards />
       <Stats />
       <Pricing />
       <Education />
       <OpenAccount />
-      <Footer />
-    </>
+      
+    </div>
   );
 }
 
