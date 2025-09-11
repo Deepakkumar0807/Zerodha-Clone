@@ -70,7 +70,7 @@ const Signin = ({ onSwitchToSignup }) => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post("https://zerodha-clone-rpcp.vercel.app/", formData);
+      const response = await axios.post("https://zerodha-clone-hatw.vercel.app/", formData);
       
       if (response.data.success) {
         setSigninSuccess(true);
@@ -214,7 +214,7 @@ const Signin = ({ onSwitchToSignup }) => {
            <button 
              type="button" 
              className="dashboard-btn"
-             onClick={() => window.open("http://localhost:3001/", "_blank")}
+             onClick={() => window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")}
              >
              Go to Dashboard
            </button>
