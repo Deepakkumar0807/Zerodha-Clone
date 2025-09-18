@@ -1,4 +1,3 @@
-
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,8 +15,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 5000;
+// ✅ MongoDB Connection (only once)
 const URI = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/zerodha";
+
+mongoose
+  .connect(URI)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // ✅ Test route
 app.get("/", (req, res) => {
@@ -77,7 +81,7 @@ app.post("/signup", async (req, res) => {
     const { firstName, lastName, email, phone, dateOfBirth, password } = req.body;
 
     const existingUser = await UserModel.findOne({
-      $or: [{ email: email.toLowerCase() }, { phone }]
+      $or: [{ email: email.toLowerCase() }, { phone }],
     });
 
     if (existingUser) {
@@ -89,18 +93,30 @@ app.post("/signup", async (req, res) => {
       }
     }
 
-    const newUser = new UserModel({ firstName, lastName, email, phone, dateOfBirth, password });
+    const newUser = new UserModel({
+      firstName,
+      lastName,
+      email,
+      phone,
+      dateOfBirth,
+      password,
+    });
     await newUser.save();
 
     res.status(201).json({
       success: true,
       message: "Account created successfully!",
-      user: newUser.getProfile()
+      user: newUser.getProfile(),
     });
-
   } catch (error) {
     if (error.name === "ValidationError") {
-      return res.status(400).json({ error: Object.values(error.errors).map(e => e.message).join(", ") });
+      return res
+        .status(400)
+        .json({
+          error: Object.values(error.errors)
+            .map((e) => e.message)
+            .join(", "),
+        });
     }
     if (error.code === 11000) {
       return res.status(400).json({ error: "Duplicate entry found" });
@@ -119,13 +135,13 @@ app.post("/signin", async (req, res) => {
     }
 
     const user = await UserModel.findOne({ email: email.toLowerCase() });
-    
+
     if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
     const isPasswordValid = await user.comparePassword(password);
-    
+
     if (!isPasswordValid) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
@@ -133,9 +149,8 @@ app.post("/signin", async (req, res) => {
     res.json({
       success: true,
       message: "Login successful!",
-      user: user.getProfile()
+      user: user.getProfile(),
     });
-
   } catch (error) {
     console.error("Signin error:", error);
     res.status(500).json({ error: "Login failed. Please try again." });
@@ -153,14 +168,5 @@ app.get("/user/:userId", async (req, res) => {
   }
 });
 
-// ✅ Connect to MongoDB
-mongoose.connect(URI)
-  .then(() => {
-    console.log("✅ MongoDB connected successfully");
-    app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
-  });
-
-  
+// ✅ Export handler for Vercel
+export default app;
