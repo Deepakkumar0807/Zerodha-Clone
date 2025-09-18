@@ -158,7 +158,7 @@ app.post("/api/signin", async (req, res) => {
 });
 
 // ✅ Get User Profile
-app.get("/api/user/:userId", async (req, res) => {
+app.get("/user/:userId", async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userId).select("-password");
     if (!user) return res.status(404).json({ error: "User not found" });
