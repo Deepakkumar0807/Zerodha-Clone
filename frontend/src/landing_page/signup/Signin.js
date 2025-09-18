@@ -70,7 +70,7 @@ const Signin = ({ onSwitchToSignup }) => {
     setIsLoading(true);
     
     try {
-      const response = await axios.post("https://zerodha-clone-hatw.vercel.app/", formData);
+      const response = await axios.post("https://zerodha-clone-silk.vercel.app/", formData);
       
       if (response.data.success) {
         setSigninSuccess(true);
@@ -85,7 +85,7 @@ const Signin = ({ onSwitchToSignup }) => {
         
         // Open dashboard in new tab after successful signin
         setTimeout(() => {
-          window.open("https://zerodha-clone-silk.vercel.app/", "_blank");
+          window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank");
         }, 1000);
       }
     } catch (error) {

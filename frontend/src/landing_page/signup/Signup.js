@@ -132,7 +132,7 @@ const Signup = () => {
       // Remove confirmPassword before sending to backend
       const { confirmPassword, ...dataToSend } = formData;
       
-      const response = await axios.post("https://zerodha-clone-hatw.vercel.app/", dataToSend);
+      const response = await axios.post("https://zerodha-clone-silk.vercel.app/", dataToSend);
       
       if (response.data.success) {
         // Clear form data
@@ -153,7 +153,7 @@ const Signup = () => {
         
         // Open dashboard in new tab after successful signup
         setTimeout(() => {
-          window.open("https://zerodha-clone-silk.vercel.app/", "_blank");
+          window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank");
         }, 1000);
       }
     } catch (error) {
