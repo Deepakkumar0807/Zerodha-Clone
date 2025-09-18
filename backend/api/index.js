@@ -76,7 +76,7 @@ app.post("/newOrder", async (req, res) => {
 });
 
 // ✅ User Signup
-app.post("/signup", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const { firstName, lastName, email, phone, dateOfBirth, password } = req.body;
 
@@ -126,7 +126,7 @@ app.post("/signup", async (req, res) => {
 });
 
 // ✅ User Signin
-app.post("/signin", async (req, res) => {
+app.post("/api/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
 
