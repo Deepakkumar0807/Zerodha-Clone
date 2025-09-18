@@ -20,7 +20,9 @@ const Signin = ({ onSwitchToSignup }) => {
 
   const checkBackendConnection = async () => {
     try {
-      const response = await axios.get("https://zerodha-clone-silk.vercel.app/ ");
+      const response = await axios.get(
+        "https://zerodha-clone-silk.vercel.app/api/health"
+      );
       if (response.data.message) {
         setBackendStatus("connected");
       }
@@ -52,37 +54,38 @@ const Signin = ({ onSwitchToSignup }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
-      const response = await axios.post("https://zerodha-clone-silk.vercel.app/", formData);
-      
+      const response = await axios.post(
+        "https://zerodha-clone-silk.vercel.app/api/signin",
+        formData
+      );
+
       if (response.data.success) {
         setSigninSuccess(true);
         setFormData({
           email: "",
           password: ""
         });
-        
-        // Show success message and open dashboard
-        const successMessage = "Login successful! 🎉\n\nDashboard will open in a new tab.\nIf it doesn't open automatically, click the 'Open Dashboard' button below.";
-        alert(successMessage);
-        
+
+        alert("Login successful! 🎉");
+
         // Open dashboard in new tab after successful signin
         setTimeout(() => {
           window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank");
@@ -90,17 +93,18 @@ const Signin = ({ onSwitchToSignup }) => {
       }
     } catch (error) {
       let errorMessage = "Login failed. Please try again.";
-      
+
       if (error.response?.data?.error) {
         errorMessage = error.response.data.error;
       } else if (error.response?.data?.message) {
         errorMessage = error.response.data.message;
       } else if (error.code === "ERR_NETWORK") {
-        errorMessage = "Network error. Please check if the backend server is running.";
+        errorMessage =
+          "Network error. Please check if the backend server is running.";
       } else if (error.message) {
         errorMessage = error.message;
       }
-      
+
       alert(errorMessage);
     } finally {
       setIsLoading(false);
@@ -114,13 +118,8 @@ const Signin = ({ onSwitchToSignup }) => {
           <img src="/logo.svg" alt="Zerodha Logo" className="logo" />
           <h2 className="signup-title">Welcome Back to Zerodha</h2>
           <p className="signup-subtitle">Sign in to your trading account</p>
-          
-          {/* Backend Status Indicator */}
-          
-            
-          
         </div>
-        
+
         <form onSubmit={handleSubmit} className="signup-form">
           <div className="form-group">
             <label htmlFor="email">Email Address *</label>
@@ -133,7 +132,9 @@ const Signin = ({ onSwitchToSignup }) => {
               className={errors.email ? "error" : ""}
               placeholder="Enter your email address"
             />
-            {errors.email && <span className="error-message">{errors.email}</span>}
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
           </div>
 
           <div className="form-group">
@@ -147,7 +148,9 @@ const Signin = ({ onSwitchToSignup }) => {
               className={errors.password ? "error" : ""}
               placeholder="Enter your password"
             />
-            {errors.password && <span className="error-message">{errors.password}</span>}
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
           </div>
 
           <div className="form-group checkbox-group">
@@ -158,9 +161,9 @@ const Signin = ({ onSwitchToSignup }) => {
             </label>
           </div>
 
-          <button 
-            type="submit" 
-            className="signup-btn" 
+          <button
+            type="submit"
+            className="signup-btn"
             disabled={isLoading || backendStatus !== "connected"}
           >
             {isLoading ? "Signing In..." : "Sign In"}
@@ -173,23 +176,25 @@ const Signin = ({ onSwitchToSignup }) => {
             <div className="success-icon">🎉</div>
             <h3>Login Successful!</h3>
             <p>Welcome back! You can now access your dashboard.</p>
-                         <button 
-               className="dashboard-btn success"
-               onClick={() => window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")}
-             >
-               🚀 Open Dashboard
-             </button>
-            <button 
+            <button
+              className="dashboard-btn success"
+              onClick={() =>
+                window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")
+              }
+            >
+              🚀 Open Dashboard
+            </button>
+            <button
               className="reset-btn"
               onClick={() => setSigninSuccess(false)}
-              style={{ 
-                marginLeft: '15px', 
-                padding: '12px 20px', 
-                background: '#6b7280', 
-                color: 'white', 
-                border: 'none', 
-                borderRadius: '8px',
-                cursor: 'pointer'
+              style={{
+                marginLeft: "15px",
+                padding: "12px 20px",
+                background: "#6b7280",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer"
               }}
             >
               Sign In Again
@@ -197,24 +202,46 @@ const Signin = ({ onSwitchToSignup }) => {
           </div>
         )}
 
-                 <div className="dashboard-access">
-           <button 
-             type="button" 
-             className="dashboard-btn"
-             onClick={() => window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")}
-             >
-             Go to Dashboard
-           </button>
-         </div>
+        <div className="dashboard-access">
+          <button
+            type="button"
+            className="dashboard-btn"
+            onClick={() =>
+              window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank")
+            }
+          >
+            Go to Dashboard
+          </button>
+        </div>
 
         <div className="signup-footer">
-          <p>Don't have an account? <a href="#" onClick={onSwitchToSignup}>Create Account</a></p>
-          <p><a href="/forgot-password" target="_blank" rel="noopener noreferrer">Forgot Password?</a></p>
-          
+          <p>
+            Don't have an account?{" "}
+            <a href="#" onClick={onSwitchToSignup}>
+              Create Account
+            </a>
+          </p>
+          <p>
+            <a
+              href="/forgot-password"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Forgot Password?
+            </a>
+          </p>
+
           {backendStatus === "disconnected" && (
             <div className="backend-help">
-              <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '10px' }}>
-                💡 To fix: Start your backend server with <code>npm start</code> in the backend folder
+              <p
+                style={{
+                  color: "#ef4444",
+                  fontSize: "12px",
+                  marginTop: "10px"
+                }}
+              >
+                💡 To fix: Start your backend server with{" "}
+                <code>npm start</code> in the backend folder
               </p>
             </div>
           )}
