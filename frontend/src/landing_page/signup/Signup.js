@@ -153,7 +153,7 @@ const Signup = () => {
         
         // Open dashboard in new tab after successful signup
         setTimeout(() => {
-          window.open("https://zerodha-clone-rpcp.vercel.app/", "_blank");
+          window.open("https://zerodha-clone-silk.vercel.app/", "_blank");
         }, 1000);
       }
     } catch (error) {
